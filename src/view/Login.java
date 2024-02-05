@@ -97,6 +97,17 @@ public class Login extends JDialog{
 		}
 	}
 	
+	private void logar() {
+		String read = "select * from funcionario where login=? and senha=md5(?)";
+		
+		try {
+			
+		} catch (Exception e) {
+			
+		}
+		
+	}
+	
 	
 
 	public static void main(String[] args) {
