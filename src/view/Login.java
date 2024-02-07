@@ -127,8 +127,16 @@ public class Login extends JDialog {
 			// Validação do funcionário (autenticação)
 			//resultadoExecucao.next() significa que o login e a senha existem, ou seja, correspondem
 
+			Home home = new Home();
+			
 			if (resultadoExecucao.next()) {
 				System.out.println("lalalalalala");
+				home.setVisible(true);
+				dispose();
+				
+			}
+			else {
+				System.out.println("Login e/ou senha inválidos.");
 			}
 
 		} catch (Exception e) {
