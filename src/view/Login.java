@@ -1,3 +1,4 @@
+
 package view;
 
 import java.awt.Color;
@@ -18,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -74,7 +76,7 @@ public class Login extends JDialog {
 		btnLogin.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnLogin.setBounds(159, 249, 80, 20);
 		getContentPane().add(btnLogin);
-		
+
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				logar();
@@ -108,39 +110,61 @@ public class Login extends JDialog {
 	private void logar() {
 		String read = "select * from funcionario where login=? and senha=md5(?)";
 
-		try {
-			// Estabelecer a conexão
-			Connection conexaoBanco = dao.conectar();
+		// Validação do login do usuário
+		if (inputLogin.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Login do usuário obrigátorio!");
+			inputLogin.requestFocus();
+		}
 
-			// Preparar a execusão do script SQL
-			PreparedStatement executarSQL = conexaoBanco.prepareStatement(read);
+		else if (inputSenha.getPassword().length == 0) {
+			JOptionPane.showMessageDialog(null, "Senha do usuário obrigátorio!");
+			inputLogin.requestFocus();
+		}
 
-			// Atribuir valores de login e senha
-			// Substituir as interrogações ?? pelo conteúdo da caixa de texto (input)
-			executarSQL.setString(1, inputLogin.getText());
-			executarSQL.setString(2, inputSenha.getText());
+		else {
 
-			// Executar os comandos SQL e de acordo com o resultado liberar os recursos na
-			// tela
-			ResultSet resultadoExecucao = executarSQL.executeQuery();
+			try {
+				// Estabelecer a conexão
+				Connection conexaoBanco = dao.conectar();
 
-			// Validação do funcionário (autenticação)
-			//resultadoExecucao.next() significa que o login e a senha existem, ou seja, correspondem
+				// Preparar a execusão do script SQL
+				PreparedStatement executarSQL = conexaoBanco.prepareStatement(read);
 
-			Home home = new Home();
-			
-			if (resultadoExecucao.next()) {
-				System.out.println("lalalalalala");
-				home.setVisible(true);
-				dispose();
-				
+				// Atribuir valores de login e senha
+				// Substituir as interrogações ?? pelo conteúdo da caixa de texto (input)
+				executarSQL.setString(1, inputLogin.getText());
+				executarSQL.setString(2, inputSenha.getText());
+
+				// Executar os comandos SQL e de acordo com o resultado liberar os recursos na
+				// tela
+				ResultSet resultadoExecucao = executarSQL.executeQuery();
+
+				// Validação do funcionário (autenticação)
+				// resultadoExecucao.next() significa que o login e a senha existem, ou seja,
+				// correspondem
+
+				if (resultadoExecucao.next()) {
+					System.out.println("lalalalalala");
+					Home home = new Home();
+					home.setVisible(true);
+					dispose();
+
+				} else {
+					// Criar um alerta (pop-pop) que informe ao usuário que login e/ou senha estão
+					// inválidos
+					JOptionPane.showMessageDialog(null, "Login e/ou senha inválido(s)!");
+					inputLogin.setText(null);
+					inputSenha.setText(null);
+					inputLogin.requestFocus();
+					
+				}
+
+				conexaoBanco.close();
 			}
-			else {
-				System.out.println("Login e/ou senha inválidos.");
-			}
 
-		} catch (Exception e) {
-			System.out.println(e);
+			catch (Exception e) {
+				System.out.println(e);
+			}
 		}
 
 	}

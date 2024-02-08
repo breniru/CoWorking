@@ -31,6 +31,13 @@ public class Home extends JDialog {
 		btnUser.setIcon(new ImageIcon(Home.class.getResource("/img/user.png")));
 		btnUser.setBounds(22, 21, 107, 105);
 		getContentPane().add(btnUser);
+		btnUser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Funcionarios funcionarios = new Funcionarios();
+				funcionarios.setVisible(true);
+				dispose();
+			}
+		});
 		
 		JButton btnRoom = new JButton("");
 		btnRoom.setBorderPainted(false);
@@ -38,6 +45,13 @@ public class Home extends JDialog {
 		btnRoom.setIcon(new ImageIcon(Home.class.getResource("/img/room.png")));
 		btnRoom.setBounds(168, 21, 107, 105);
 		getContentPane().add(btnRoom);
+		btnRoom.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			Salas salas = new Salas();
+			salas.setVisible(true);
+			dispose();
+		}
+	});
 		
 		JButton btnReserve = new JButton("");
 		btnReserve.setBorderPainted(false);
@@ -45,7 +59,13 @@ public class Home extends JDialog {
 		btnReserve.setIcon(new ImageIcon(Home.class.getResource("/img/reserve.png")));
 		btnReserve.setBounds(301, 21, 104, 105);
 		getContentPane().add(btnReserve);
-		
+		btnReserve.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Reservas reservas = new Reservas();
+				reservas.setVisible(true);
+				dispose();
+			}
+		});
 	}
 	
 	public static void main(String[] args) {
