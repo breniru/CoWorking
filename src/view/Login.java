@@ -147,6 +147,9 @@ public class Login extends JDialog {
 					System.out.println("lalalalalala");
 					Home home = new Home();
 					home.setVisible(true);
+					
+					home.txtUsuarioLogado.setText("Usuário: " + resultadoExecucao.getString(2));
+					
 					dispose();
 
 				} else {

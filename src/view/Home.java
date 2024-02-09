@@ -1,24 +1,38 @@
 package view;
 
-import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.EventQueue;
-import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.text.DateFormat;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import javax.swing.JPanel;
 
 public class Home extends JDialog {
+	
+	public JLabel txtUsuarioLogado;
+	public JPanel panelUsuario;
+	public JLabel txtData;
+	
 	public Home() {
+		addWindowListener(new WindowAdapter() {
+			public void windowActivated(WindowEvent e) {
+				Date dataSistema = new Date();
+				DateFormat formatadorData = DateFormat.getDateInstance(DateFormat.FULL);
+				txtData.setText(formatadorData.format(dataSistema));
+			}
+		}); 
+		
+		
 		setTitle("Home");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Home.class.getResource("/img/logo.png")));
 		setResizable(false);
@@ -59,6 +73,20 @@ public class Home extends JDialog {
 		btnReserve.setIcon(new ImageIcon(Home.class.getResource("/img/reserve.png")));
 		btnReserve.setBounds(301, 21, 104, 105);
 		getContentPane().add(btnReserve);
+		
+		panelUsuario = new JPanel();
+		panelUsuario.setBounds(0, 308, 434, 53);
+		getContentPane().add(panelUsuario);
+		panelUsuario.setLayout(null);
+		
+		txtUsuarioLogado = new JLabel("");
+		txtUsuarioLogado.setBounds(10, 28, 157, 14);
+		panelUsuario.add(txtUsuarioLogado);
+		
+		txtData = new JLabel("");
+		txtData.setBounds(234, 28, 200, 14);
+		panelUsuario.add(txtData);
+		
 		btnReserve.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Reservas reservas = new Reservas();

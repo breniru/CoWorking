@@ -1,34 +1,21 @@
 package view;
 
-import javax.swing.JDialog;
-
+import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
+import javax.swing.JDialog;
 
 public class Reservas extends JDialog {
 	public Reservas() {
-		setResizable(false);
-		setTitle("Reservas");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Reservas.class.getResource("/img/logo.png")));
-		setBounds(new Rectangle(0, 0, 450, 400));
+		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		getContentPane().setLayout(null);
-		
-		JButton btnReserVoltar = new JButton("Voltar");
-		btnReserVoltar.setBounds(148, 77, 89, 23);
-		getContentPane().add(btnReserVoltar);
-		btnReserVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Home home = new Home();
-				home.setVisible(true);
-				dispose();
-			}
-		});
-		
+		setResizable(false);
+		setBounds(new Rectangle(0, 0, 450, 400));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Reservas.class.getResource("/img/logo.png")));
+		setTitle("Reservas");
 	}
 
 	public static void main(String[] args) {
