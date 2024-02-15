@@ -24,6 +24,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import Atxy2k.CustomTextField.RestrictedTextField;
 import model.DAO;
 
 public class Login extends JDialog {
@@ -87,6 +88,29 @@ public class Login extends JDialog {
 		imgDatabase.setIcon(new ImageIcon(Login.class.getResource("/img/databaseOff.png")));
 		imgDatabase.setBounds(10, 252, 53, 58);
 		getContentPane().add(imgDatabase);
+		
+		//Acessar o botão "Entrar" com a tecla "Enter"
+		getRootPane().setDefaultButton(btnLogin);
+		
+		//Validação dos campos utilizando a biblioteca Atxy2k
+		
+		//Validação do campo inputLogin
+		RestrictedTextField validarLogin = new RestrictedTextField(inputLogin, "abcdefghijklmnopqrstuvwxyz0123456789_-.");
+			
+		//Determinar o uso de alguns caracteres especiais(_ - .) e alfanúmericos
+		validarLogin.setOnlyCustomCharacters(true);
+		
+		//Limitar a somente 20 caracteres no campo login
+		validarLogin.setLimit(20);
+
+		//Validação do campo inputSenha
+		RestrictedTextField validarSenha = new RestrictedTextField(inputSenha);
+		
+		//Limitar a somente 15 caracteres no campo senha
+		validarSenha.setLimit(15);
+		
+		
+		
 	}
 
 	DAO dao = new DAO();
