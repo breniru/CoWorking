@@ -173,6 +173,8 @@ public class Login extends JDialog {
 					home.setVisible(true);
 					
 					home.txtUsuarioLogado.setText("Usuário: " + resultadoExecucao.getString(2));
+					home.txtPerfilLogado.setText("Perfil: " + resultadoExecucao.getString(5));
+
 					
 					dispose();
 
