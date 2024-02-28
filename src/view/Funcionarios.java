@@ -359,7 +359,7 @@ public class Funcionarios extends JDialog {
 
 	private void buscarFuncionario() {
 
-		String readBtn = "select * from funcionario where nomeFunc = ?;";
+		String readBtn = "select * from funcionario where idFuncionario = ?;";
 
 		try {
 			// Estabelecer a conexão
@@ -369,7 +369,7 @@ public class Funcionarios extends JDialog {
 			PreparedStatement executarSQL = conexaoBanco.prepareStatement(readBtn);
 
 			// Substituir o ? pelo conteúdo da caixa de texto
-			executarSQL.setString(1, inputNome.getText());
+			executarSQL.setString(1, inputID.getText());
 
 			// Executar o comando SQL e exibir o resultado no formulário funcionário (todos
 			// os seus dados)
